@@ -1,0 +1,34 @@
+﻿@using IntelligenceReporting.WebApp.Services
+@inject IPagerService _pagerService
+
+<div class="pager-rows">
+   <MudText Typo="Typo.body2" Class="pt-8 pr-5 bold align-right">Rows per page:</MudText>
+   <MudSelect @bind-Value="RowsPerPage"
+              T="int" 
+              UserAttributes="@_rowsPerPageAttributes"
+              Class="pager-select"
+              FullWidth="false"
+              Dense="true" 
+              Variant="Variant.Outlined" 
+              AnchorOrigin="Origin.CenterRight" 
+              SelectedValuesChanged="RowsPerPageChanged">
+      <MudSelectItem Value="25" Class="rows-per-page" UserAttributes="@_rowsPerPage25Attributes">25</MudSelectItem>
+      <MudSelectItem Value="50" Class="rows-per-page" UserAttributes="@_rowsPerPage50Attributes">50</MudSelectItem>
+      <MudSelectItem Value="100" Class="rows-per-page" UserAttributes="@_rowsPerPage100Attributes">100</MudSelectItem>
+      <MudSelectItem Value="10000" Class="rows-per-page" UserAttributes="@_rowsPerPageAllAttributes">All</MudSelectItem>
+   </MudSelect>
+</div>
+<div class="d-flex flex-column align-center">
+   <MudPagination SelectedChanged="PageChanged" 
+                  UserAttributes="@_paginationAttributes"
+                  MiddleCount="5" 
+                  Rectangular="true" 
+                  Variant="Variant.Filled" 
+                  Count="@NumberOfPages" 
+                  Class="my-4" 
+                  Selected="PageNumber"
+                  ShowPreviousButton="@ShowPreviousNextFirstLastButtons"
+                  ShowNextButton="@ShowPreviousNextFirstLastButtons"
+                  ShowFirstButton="@ShowPreviousNextFirstLastButtons" 
+                  ShowLastButton="@ShowPreviousNextFirstLastButtons" />
+</div>

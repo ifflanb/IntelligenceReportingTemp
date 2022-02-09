@@ -1,0 +1,22 @@
+﻿@using IntelligenceReporting.WebApp.Services
+@using IntelligenceReporting.Entities
+@inject IFilterSelectionService _filterSelectionService
+@inject IApiService _apiService;
+
+<MudAutocomplete T="MultiOffice"
+                 UserAttributes="@_attributes"
+                 Class="@Class"
+                 Label="Select Multi-Office grouping..."
+                 SearchFunc="@Search"
+                 Clearable="true"
+                 MaxItems="20"
+                 ToStringFunc="@(e => $"{e.MultiOfficeName} ({e.Id})")"
+                 ResetValueOnEmptyText="true"
+                 CoerceText="true"
+                 CoerceValue="true"
+                 AdornmentIcon="@Icons.Material.Filled.Search"
+                 AdornmentColor="Color.Primary"
+                 Margin="Margin.Dense"
+                 Variant="Variant.Outlined"
+                 AnchorOrigin="Origin.BottomCenter"
+                 ValueChanged=@(OnValueChanged) />

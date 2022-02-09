@@ -1,0 +1,12 @@
+﻿<MudBreadcrumbs Items="Items" Separator=">">
+	<ItemTemplate Context="item">
+		<MudLink Href="@item.Href" Disabled="@item.Disabled" >@item.Text</MudLink>
+	</ItemTemplate>
+</MudBreadcrumbs>
+
+@code {
+
+	[Parameter]
+	public List<BreadcrumbItem> Items { get; set; } = new();
+
+}

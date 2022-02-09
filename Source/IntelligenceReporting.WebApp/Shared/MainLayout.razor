@@ -1,0 +1,70 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="_myCustomTheme" DefaultScrollbar="true" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+	<MudAppBar>
+		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+		<MudText Typo="Typo.h5">Intelligence Reporting</MudText>
+		<MudSpacer />
+		<MudAvatar Size="Size.Medium" Image="https://s3-ap-southeast-2.amazonaws.com/staffphotos-clientvault-com/306/small.1641930022-149169-image.jpg" Alt="Profile photo" />
+	</MudAppBar>
+   <MudSwipeArea OnSwipe="@OnSwipe" Style="width: 100%;">
+	   <MudDrawer @bind-Open="@_drawerOpen">
+		   <NavMenu/>
+	   </MudDrawer>
+   </MudSwipeArea>
+	<MudMainContent>
+		<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="pl-0 pr-0">
+			@Body
+		</MudContainer>
+		<Footer></Footer>
+	</MudMainContent>
+</MudLayout>
+
+@code {
+	bool _drawerOpen = true;
+
+   private void DrawerToggle()
+	{
+		_drawerOpen = !_drawerOpen;
+	}
+
+   private void OnSwipe(SwipeDirection direction)
+   {
+      if (direction == SwipeDirection.LeftToRight && !_drawerOpen)
+      {
+         _drawerOpen = true;
+         StateHasChanged();
+      }
+      else if (direction == SwipeDirection.RightToLeft && _drawerOpen)
+      {
+         _drawerOpen = false;
+         StateHasChanged();
+      }
+   }
+   
+   readonly MudTheme _myCustomTheme = new()
+	{
+		Palette = new Palette
+		{
+			Primary = Colors.Blue.Default,
+			Secondary = Colors.Blue.Lighten3,
+			AppbarBackground = Colors.Blue.Darken2,
+			Background = "#f4f6fa"
+		},
+
+		PaletteDark = new Palette
+		{
+			Primary = Colors.Blue.Lighten1
+		},
+
+		LayoutProperties = new LayoutProperties
+		{
+			DrawerWidthLeft = "260px",
+			DrawerWidthRight = "300px"
+		}
+	};
+}

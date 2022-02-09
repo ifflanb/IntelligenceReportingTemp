@@ -1,0 +1,5 @@
+﻿CREATE TABLE dbo.Status
+(
+    Id INT NOT NULL CONSTRAINT PK_Status PRIMARY KEY,
+    StatusName NVARCHAR(50) NOT NULL
+)

@@ -1,0 +1,22 @@
+﻿@using IntelligenceReporting.WebApp.Services
+@using IntelligenceReporting.Entities
+@inject ILocalStorageService _storage
+@inject IFilterSelectionService _filterSelectionService
+
+<MudAutocomplete T="Brand" 
+                 UserAttributes="@_attributes"
+                 Class="@Class"
+                 Label="Select Brand..." 
+                 SearchFunc="@Search" 
+                 Clearable="true" 
+                 MaxItems="20"
+                 ToStringFunc="@(e => e.BrandName)"
+                 ResetValueOnEmptyText="true"
+                 CoerceText="true" 
+                 CoerceValue="true"
+                 AdornmentIcon="@Icons.Material.Filled.Search" 
+                 AdornmentColor="Color.Primary" 
+                 Margin="Margin.Dense" 
+                 Variant="Variant.Outlined" 
+                 AnchorOrigin="Origin.BottomCenter"
+                 ValueChanged=@(OnValueChanged) />

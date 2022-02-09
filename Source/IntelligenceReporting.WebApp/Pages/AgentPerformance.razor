@@ -1,0 +1,172 @@
+﻿@page "/agent-performance"
+@using IntelligenceReporting.WebApp.Services
+@using IntelligenceReporting.Queries
+
+@inject IJSRuntime _js
+@inject IApiService _apiService
+@inject IStringLocalizer<App> _loc
+@inject IConfiguration _config
+@inject IPagerService _pagerService
+@inject IFilterSelectionService _filterSelectionService
+
+<Header PageTitle="Intelligence Reporting - Agent Performance"
+        HeaderText="Agent Performance"
+        Breadcrumbs="_items">
+</Header>
+
+@if (_loading)
+{
+    <div class="progress"><MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" /></div>
+}
+
+<MudPaper Class="pa-5 ma-5">
+    <div class="d-flex flex-wrap flex-start">
+        <BrandAutoComplete Class="ma-3 auto-complete"></BrandAutoComplete>
+        <CountryDropDown Class="ma-3 auto-complete"></CountryDropDown>
+        <StateDropDown Class="ma-3 auto-complete"></StateDropDown>
+        <MultiOfficeAutoComplete Class="ma-3 auto-complete"></MultiOfficeAutoComplete>
+        <OfficeAutoComplete Class="ma-3 auto-complete"></OfficeAutoComplete>
+        <StaffAutoComplete Class="ma-3 auto-complete"></StaffAutoComplete>
+        <ReportMethodOfSaleDropDown Class="ma-3 auto-complete"></ReportMethodOfSaleDropDown>
+        <ReportPropertyClassDropDown Class="ma-3 auto-complete" Items="_reportPropertyClassItems"></ReportPropertyClassDropDown>
+        <OrderByDropDown Class="ma-3 auto-complete" Items="_orderByItems"></OrderByDropDown>
+        <MudDatePicker @ref="_startPicker"
+                       Date="_startDate"
+                       Label="Start Date"
+                       AutoClose="true"
+                       Rounded="true"
+                       Class="ml-3 mr-3 mt-2 date-picker"
+                       Margin="Margin.Dense"
+                       Editable="true"
+                       DateFormat="dd/MM/yyyy"
+                       Error="@_isStartDateError"
+                       ErrorText="Please enter a date"
+                       DateChanged="@OnStartDateChanged"
+                       Variant="Variant.Outlined">
+            <PickerActions>
+                <MudButton OnClick="@(() => _startPicker.Close(false))" UserAttributes="@_startDateCancelAttributes">Cancel</MudButton>
+                <MudButton Color="Color.Primary" OnClick="@(() => _startPicker.Close())" UserAttributes="@_startDateOkAttributes">Ok</MudButton>
+            </PickerActions>
+        </MudDatePicker>
+        <MudDatePicker @ref="_endPicker"
+                       Date="_endDate"
+                       Label="End Date"
+                       AutoClose="true"
+                       Rounded="true"
+                       Class="ml-3 mr-3 mt-2 date-picker"
+                       Margin="Margin.Dense"
+                       Editable="true"
+                       DateFormat="dd/MM/yyyy"
+                       Error="@_isEndDateError"
+                       ErrorText="Please enter a date"
+                       DateChanged="@OnEndDateChanged"
+                       Variant="Variant.Outlined">
+            <PickerActions>
+                <MudButton OnClick="@(() => _endPicker.Close(false))" UserAttributes="@_startEndCancelAttributes">Cancel</MudButton>
+                <MudButton Color="Color.Primary" OnClick="@(() => _endPicker.Close())" UserAttributes="@_startEndOkAttributes">Ok</MudButton>
+            </PickerActions>
+        </MudDatePicker>
+        <MudButton Class="ml-3 mr-3 mt-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="GenerateReport" UserAttributes="@_generateReportAttributes">Generate Report</MudButton>
+    </div>
+</MudPaper>
+
+<MudPaper Class="pa-5 ma-5">
+   @if (_staff == null)
+   {
+      <MudText Typo="Typo.body2" Class="pt-3">Select an office to view the staff.</MudText>
+   }
+   else if (!_staff.Any())
+   {
+      <MudText Typo="Typo.body2" Class="pt-3">There are no results.</MudText>
+   }
+   else
+   {
+      <MudDataGrid T="AgentEarningsQueryResult"
+                   Items="@_staff"
+                   UserAttributes="@_agentEarningsAttributes"
+                   Hover="true"
+                   Striped="true"
+                   Elevation="0"
+                   Loading="@_loading"
+                   FixedHeader="true"
+                   ShowColumnOptions="false"
+                   Sortable="false"
+                   Filterable="false"
+                   RowsPerPage="10001"
+                   RowClassFunc="_rowClassFunc">
+         <ToolBarContent>
+            <MudText Typo="Typo.h6">Agent Earnings</MudText>
+            <MudSpacer />
+         </ToolBarContent>
+         <Columns>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.StaffName)" Title="Name">
+               <CellTemplate>@context.StaffName</CellTemplate>
+               <FooterTemplate>Average</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.OfficeName)" Title="Office">
+               <CellTemplate>@context.OfficeName</CellTemplate>
+               <FooterTemplate></FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Appraisals)" Title="Appraisals" Class="align-right">
+               <CellTemplate>@($"{@context.Appraisals:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Appraisals:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Listings)" Title="Listings" Class="align-right">
+               <CellTemplate>@($"{@context.Listings:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Listings:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.ListingUnits)" Title="Listing Units" Class="align-right">
+               <CellTemplate>@($"{@context.ListingUnits:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.ListingUnits:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Auctions)" Title="Auctions" Class="align-right">
+               <CellTemplate>@($"{@context.Auctions:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Auctions:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Enquiries)" Title="Enquiries" Class="align-right">
+               <CellTemplate>@($"{@context.Enquiries:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Enquiries:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Inspections)" Title="Inspections" Class="align-right">
+               <CellTemplate>@($"{@context.Inspections:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Inspections:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Conditionals)" Title="Conditionals" Class="align-right">
+               <CellTemplate>@($"{@context.Conditionals:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Conditionals:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Unconditionals)" Title="Unconditionals" Class="align-right">
+               <CellTemplate>@($"{@context.Unconditionals:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Unconditionals:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Settlements)" Title="Settlements" Class="align-right">
+               <CellTemplate>@($"{@context.Settlements:#,##0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Settlements:#,##0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.Commission)" Title="Commission" Class="align-right">
+               <CellTemplate>@($"{context.Commission:C}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.Commission:C}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.AverageDaysOnMarket)" Title="Days on market" Class="align-right">
+               <CellTemplate>@($"{context.AverageDaysOnMarket:0.0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.AverageDaysOnMarket:0.0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.ListingsPerAppraisal)" Title="Listings/Appraisals" Class="align-right">
+               <CellTemplate>@($"{context.ListingsPerAppraisal:P0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.ListingsPerAppraisal:P0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.SalesPerListing)" Title="Sales/Listing" Class="align-right">
+               <CellTemplate>@($"{context.SalesPerListing:P0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.SalesPerListing:P0}")</FooterTemplate>
+            </Column>
+            <Column T="AgentEarningsQueryResult" Field="@nameof(AgentEarningsQueryResult.SettlementsPerSale)" Title="Settlements/Sale" Class="align-right">
+               <CellTemplate>@($"{context.SettlementsPerSale:P0}")</CellTemplate>
+               <FooterTemplate>@($"{_averages.SettlementsPerSale:P0}")</FooterTemplate>
+            </Column>
+         </Columns>
+         <PagerContent>
+            <Pager @ref="_pager" NumberOfPages="@_numberOfPages" RowsPerPage="@_rowsPerPage" ShowPreviousNextFirstLastButtons="@_showPreviousNextFirstLastButtons"></Pager>
+         </PagerContent>
+      </MudDataGrid>
+   }
+</MudPaper>

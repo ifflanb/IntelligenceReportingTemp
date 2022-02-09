@@ -1,0 +1,87 @@
+﻿.progress {
+	top: 45vh;
+	left: 55vw;
+	position: absolute;
+}
+
+.mud-button {
+	height: 45px;
+}
+
+.align-left {
+	text-align: left !important;
+}
+
+.align-right {
+	text-align: right !important;
+}
+
+.date-picker {
+	width: 200px !important;
+	max-width: 200px !important;
+}
+
+.mud-scroll-to-top {
+	z-index: 1001;
+}
+
+.auto-complete {
+	width: 400px;
+	max-width: 400px;
+}
+
+.bold {
+	font-weight: bold !important;
+}
+
+.rows-per-page {
+	> div {
+		> p {
+			font-weight: bold !important;
+		}
+	}
+}
+
+.pager-rows {
+	float: right;
+	display: flex;
+
+	.pager-select {
+		max-width: 80px;
+		width: 80px;
+
+		div {
+			&.mud-select-input {
+				font-weight: bold !important;
+			}
+		}
+	}
+}
+
+.mud-table-head {
+	> tr {
+		> th {
+			&.align-right {
+				text-align: left !important;
+			}
+		}
+	}
+}
+
+.mud-table-foot {
+	> tr {
+		> td {
+			font-weight: bold !important;
+		}
+	}
+}
+
+.mock-table-footer {
+	&:hover {
+		background-color: transparent !important;
+	}
+
+	> td {
+		font-weight: bold !important;
+	}
+}

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntelligenceReporting.Entities.AgentEarnings">
+    <Position X="0.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAgAAAAQAAAABDgAAAgAAEQAA=</HashCode>
+      <FileName>Entities\AgentEarnings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Brand">
+    <Position X="11.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Brand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Country">
+    <Position X="14" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Country.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Entity">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.SynchronizedEntity">
+    <Position X="16.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.MethodOfSale">
+    <Position X="2.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\MethodOfSale.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Office">
+    <Position X="16.25" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Entities\Office.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Role">
+    <Position X="11.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.SaleLife">
+    <Position X="7.25" Y="5.75" Width="2" />
+    <AssociationLine Name="Earnings" Type="IntelligenceReporting.Entities.SaleLifeEarnings" FixedFromPoint="true">
+      <Path>
+        <Point X="7.75" Y="5.75" />
+        <Point X="7.75" Y="4.752" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AIIAAAAIoAAAAAAAAAMAAQEAACAAQAACgAACQAYAEEA=</HashCode>
+      <FileName>Entities\SaleLife.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Agents" />
+      <Property Name="Earnings" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.SaleLifeAgent">
+    <Position X="5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SaleLifeAgent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.SaleLifeEarnings">
+    <Position X="7.25" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAIAAAAAAAEAAAAAAAAAAAAAAAACIAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SaleLifeEarnings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Source">
+    <Position X="14" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Source.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Staff">
+    <Position X="9.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAA=</HashCode>
+      <FileName>Entities\Staff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.StaticData">
+    <Position X="18.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAEAAAAAAAAAgAQAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Entities\StaticData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntelligenceReporting.Entities.Status">
+    <Position X="9.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="IntelligenceReporting.Entities.MethodOfSaleId" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAACABAAAAAAgAAAAAQAAAAIEA=</HashCode>
+      <FileName>Entities\MethodOfSale.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IntelligenceReporting.Entities.RoleId" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAACCAA=</HashCode>
+      <FileName>Entities\Role.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IntelligenceReporting.Entities.SourceId" Collapsed="true">
+    <Position X="14" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Source.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="IntelligenceReporting.Entities.StatusId" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAIAEAAAAAAAAECAAAAAAAEAIAAAARAAAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Status.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

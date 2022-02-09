@@ -1,0 +1,18 @@
+﻿<PageTitle>@PageTitle</PageTitle>
+
+<MudPaper Class="pa-5" Elevation="0">
+	<MudText Typo="Typo.h4">@HeaderText</MudText>
+
+	<BreadCrumbs Items="@Breadcrumbs" />
+</MudPaper>
+
+@code {
+	[Parameter]
+	public string? PageTitle { get; set; }
+
+	[Parameter]
+	public string? HeaderText { get; set; }
+	
+	[Parameter]
+	public List<BreadcrumbItem>? Breadcrumbs { get; set; }
+}

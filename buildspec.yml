@@ -8,8 +8,10 @@ phases:
     build:
         commands:
             - dotnet restore ./Source/IntelligenceReporting.sln
-            - dotnet build publish -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
-            - dotnet build publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj
+            - dotnet build -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
+            - dotnet build -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj
+            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
+            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj    
 artifacts:
   type: zip
   files:
@@ -18,6 +20,3 @@ artifacts:
     - './Source/IntelligenceReporting.Database/**/*'
     - 'appspec.yml'    
   name: output
-exclude-paths:
-    - '**/*.pdb'
-    - '**/*.Development.json'

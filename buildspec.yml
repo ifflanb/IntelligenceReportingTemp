@@ -15,8 +15,8 @@ phases:
 artifacts:
   type: zip
   files:
-    - './Source/IntelligenceReporting.WebApi/bin/Release/net6.0/browser-wasm/publish/**/*'
-    - './Source/IntelligenceReporting.WebApp/bin/Release/net6.0/browser-wasm/publish/**/*'
+    - './Source/IntelligenceReporting.WebApi/**/*'
+    - './Source/IntelligenceReporting.WebApp/**/*'
     - './Source/IntelligenceReporting.Database/**/*'
     - 'appspec.yml'    
   name: output

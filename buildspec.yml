@@ -19,3 +19,7 @@ artifacts:
     - './Source/IntelligenceReporting.Database/**/*'
     - 'appspec.yml'    
   name: output
+exclude-paths:
+    - './Source/IntelligenceReporting.WebApi/bin/Release/net6.0/publish'
+    - '**/*.pdb'
+    - '**/*.Development.json'

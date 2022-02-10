@@ -5,15 +5,11 @@ phases:
         commands:
             - /usr/local/bin/dotnet-install.sh --channel LTS
             - dotnet workload install wasm-tools
-        runtime-versions:            
-            - dotnet:6.0
     build:
         commands:
             - dotnet restore ./Source/IntelligenceReporting.sln
-            - dotnet build -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
-            - dotnet build -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj
-            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
-            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj    
+            - dotnet build publish -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
+            - dotnet build publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj
 artifacts:
   type: zip
   files:

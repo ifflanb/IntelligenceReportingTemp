@@ -17,4 +17,5 @@ artifacts:
     - './Source/IntelligenceReporting.WebApi/bin/Release/net6.0/*'
     - './Source/IntelligenceReporting.WebApp/bin/Release/net6.0/*'
     - './Source/IntelligenceReporting.Database/**/*'
+    - 'appspec.yml'    
   name: output

@@ -10,6 +10,8 @@ phases:
             - dotnet restore ./Source/IntelligenceReporting.sln
             - dotnet build -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
             - dotnet build -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj
+            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApi/IntelligenceReporting.WebApi.csproj
+            - dotnet publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj             
 artifacts:
   type: zip
   files:

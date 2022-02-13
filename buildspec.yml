@@ -16,6 +16,6 @@ artifacts:
   type: zip
   files: 
     - './Source/IntelligenceReporting.WebApi/bin/Release/net6.0/publish/**/*'
-    - './Source/IntelligenceReporting.WebApp/bin/Release/net6.0/browser-wasm/publish/**/*'
+    - './Source/IntelligenceReporting.WebApp/bin/Release/net6.0/**/*'
     - './Source/IntelligenceReporting.Database/**/*'
     - './appspec.yml'

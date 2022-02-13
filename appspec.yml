@@ -1,8 +1,8 @@
 version: 0.0
 os: windows
 files:
-  - source: .\Source\IntelligenceReporting.WebApi\bin\Release\net6.0\
+  - source: .\Source\IntelligenceReporting.WebApi\bin\Release\net6.0\publish\
     destination: D:\sites\intelligencereporting\webapi
-  - source: .\Source\IntelligenceReporting.WebApp\bin\Release\net6.0\
+  - source: .\Source\IntelligenceReporting.WebApp\bin\Release\net6.0\publish\
     destination: D:\sites\intelligencereporting\webapp 
 file_exists_behavior: OVERWRITE    

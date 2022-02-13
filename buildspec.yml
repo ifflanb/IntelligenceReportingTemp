@@ -14,7 +14,7 @@ phases:
             - dotnet publish -c Release ./Source/IntelligenceReporting.WebApp/IntelligenceReporting.WebApp.csproj             
 artifacts:
   type: zip
-  files: 
+  files:
     - './Source/IntelligenceReporting.WebApi/bin/Release/net6.0/publish/**/*'
     - './Source/IntelligenceReporting.WebApp/bin/Release/net6.0/**/*'
     - './Source/IntelligenceReporting.Database/**/*'

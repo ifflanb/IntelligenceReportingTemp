@@ -1,3 +1,5 @@
+using Amazon.Extensions.NETCore.Setup;
+using Amazon.Runtime;
 using IntelligenceReporting.Databases;
 using IntelligenceReporting.Repositories;
 using IntelligenceReporting.Settings;
@@ -53,11 +55,31 @@ builder.Services.AddScoped(_ =>
         builder.Configuration.Bind("VaultDbSettings", vaultDbSettings);
         return vaultDbSettings;
     });
+
 builder.Services.AddScoped<IVaultDatabase, VaultDatabase>();
 builder.Services.AddScoped<IVaultDatabase2, VaultDatabase>();
 
-var app = builder.Build();
+// Add the AWS systems configuration manager so that manages the config
+IConfiguration configuration = builder.Configuration;
 
+if (!builder.Environment.IsDevelopment())
+{
+    //TODO: Need to get these from elsewhere more securely
+    var awsAccessKey = configuration["AWS:AccessKey"];
+    var awsSecretKey = configuration["AWS:SecretKey"];
+    AWSCredentials credentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
+
+    AWSOptions options = new()
+    {
+        Credentials = credentials,
+        Region = Amazon.RegionEndpoint.APSoutheast2
+    };
+    builder.Services.AddDefaultAWSOptions(options);
+    builder.Configuration.AddSystemsManager($"/intelligence-reporting/{builder.Environment.EnvironmentName.ToLower()}/", options);
+    builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager($"/intelligence-reporting/{builder.Environment.EnvironmentName}/VaultDbSettings");
+}
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -352,3 +352,5 @@ MigrationBackup/
 Source/IntelligenceReporting.WebApp/wwwroot/**/Site*.css
 Source/IntelligenceReporting.WebApp/wwwroot/**/loading*.css
 Source/IntelligenceReporting.WebApp/wwwroot/**/site*.js
+Source/IntelligenceReporting.WebApp/wwwroot/appsettings.staging.json
+Source/IntelligenceReporting.WebApp/wwwroot/appsettings.production.json

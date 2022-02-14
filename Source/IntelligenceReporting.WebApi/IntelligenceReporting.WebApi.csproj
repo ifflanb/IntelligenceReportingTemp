@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Amazon.AspNetCore.DataProtection.SSM" Version="2.1.0" />
+    <PackageReference Include="Amazon.Extensions.Configuration.SystemsManager" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="SSH.NET" Version="2020.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />

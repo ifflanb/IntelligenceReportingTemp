@@ -59,13 +59,12 @@ builder.Services.AddScoped(_ =>
 builder.Services.AddScoped<IVaultDatabase, VaultDatabase>();
 builder.Services.AddScoped<IVaultDatabase2, VaultDatabase>();
 
-var app = builder.Build();
-
 // Add the AWS systems configuration manager so that manages the config
 IConfiguration configuration = builder.Configuration;
 
-if (!app.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
+    //TODO: Need to get these from elsewhere more securely
     var awsAccessKey = configuration["AWS:AccessKey"];
     var awsSecretKey = configuration["AWS:SecretKey"];
     AWSCredentials credentials = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
@@ -79,6 +78,8 @@ if (!app.Environment.IsDevelopment())
     builder.Configuration.AddSystemsManager($"/intelligence-reporting/{builder.Environment.EnvironmentName.ToLower()}/", options);
     builder.Services.AddDataProtection().PersistKeysToAWSSystemsManager($"/intelligence-reporting/{builder.Environment.EnvironmentName}/VaultDbSettings");
 }
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

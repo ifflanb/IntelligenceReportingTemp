@@ -2,8 +2,10 @@ version: 0.2
 
 phases:
     install:
+        runtime-versions:
+            dotnet: latest
+                - latest
         commands:
-            - ./Aws/dotnet-install.ps1 -Channel Current
             - dotnet workload install wasm-tools
     build:
         commands:

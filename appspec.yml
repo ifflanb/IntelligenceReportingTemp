@@ -4,5 +4,9 @@ files:
   - source: .\Source\IntelligenceReporting.WebApi\bin\Release\net6.0\publish\
     destination: D:\sites\intelligencereporting\webapi
   - source: .\Source\IntelligenceReporting.WebApp\bin\Release\net6.0\publish\
-    destination: D:\sites\intelligencereporting\webapp 
-file_exists_behavior: OVERWRITE    
+    destination: D:\sites\intelligencereporting\webapp
+file_exists_behavior: OVERWRITE
+hooks:
+    BeforeInstall:
+    - location: .\codedeploy-beforeinstall.cmd
+    - location: .\codedeploy-beforeinstall.sh
